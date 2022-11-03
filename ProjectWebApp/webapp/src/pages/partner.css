@@ -1,0 +1,113 @@
+.Tile{
+	font-size:60px;
+	position:relative;
+	text-align:center;
+	top:-50px;
+	width:100%;
+	background:#EB9B49;
+	color:#EB9B49;
+}
+
+.buttonn{
+	display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonn input{
+	width:250px;
+	float:right;
+	margin-left:auto;
+	font-size:18px;
+}
+
+
+
+.buttonn Button {
+	background:#315659;
+	width:200%;
+	font-size:17px;
+	font-weight:bold;
+	color:white;
+	margin-top:5px;
+}
+
+
+.buttonn Button:hover {
+  background-color: #C2813F;
+
+}
+
+.Container{
+	margin-left:45px;
+	padding:40px;
+	width: auto;
+  display:inline-flex;
+  align-items: center;
+  justify-content: center;
+	background:#F2EDD7EF;
+}
+
+.Box {
+	background:#EB9B49;
+	padding: 50px 10px 50px 20px;
+	text-align:left;
+	overflow:hidden;
+	border-radius:24px;
+	font-size:17px;
+	font-weight: bold;
+	justify-content: space-between;
+	width: 500px;
+  height: 395px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.Title{
+	width:auto;
+	font-size:60px;
+	position:relative;
+	text-align:center;
+	top:-30px;
+
+}
+
+
+
+.editIcon{
+	float:right;
+	justify-content: flex-end;
+
+
+}
+
+.deleteIcon{
+	float:right;
+  justify-content: flex-end;
+  display: flex;
+}
+
+
+h3{
+	padding:2.3px;
+}
+
+
+@media only screen and (max-width: 1265px) {
+	.Container{
+			display:flex;
+		  justify-content: center;
+		
+	}
+	.Box{
+		font-size:15px;
+	}
+}
+
+
+
