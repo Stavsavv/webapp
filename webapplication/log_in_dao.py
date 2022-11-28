@@ -1,22 +1,21 @@
 from sql_connect import get_sql_connect
 
 
-
-
-def log_in(connection, register):
+def log_in(connection, loginD):
     cursor = connection.cursor()
+    email = "'" + loginD['email'] + "'"
+    password = "'" + loginD['password'] + "'"
+    print(email)
+    print(password)
 
+    query = 'select * from dbweb.register where email = ' + email + ' and password = ' + password
 
-    query = 'select * dbweb.register where email = %s  and password = %s '
-
-    data = (register['username'], register['email'], register['password'])
-    cursor.execute(query, data)
-    connection.commit()
-
-    if():
-
-     return "success"
-
+    cursor.execute(query)
+    cursor.fetchall()
+    if cursor.rowcount == 1:
+        return "success"
+    else:
+        return "failed"
 
 
 if __name__ == '__main__':

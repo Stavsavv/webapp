@@ -7,10 +7,12 @@ import LogIn from './components/Login/index';
 import Register from './components/Register/index';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import useToken from './components/Token';
+
 
 
 function App() {
-
+	const { token, removeToken, setToken } = useToken();
 	const [isOpen, setIsOpen] = useState(false)
 
 	const toggle = () => {

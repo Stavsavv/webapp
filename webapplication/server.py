@@ -1,16 +1,17 @@
 import json
 
-from flask import Flask, request, jsonify, session, redirect, url_for
+from flask import Flask, request, jsonify
+from datetime import datetime, timedelta, timezone
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
+    unset_jwt_cookies, jwt_required, JWTManager
+
 from flask_cors import CORS
 
+import log_in_dao
 import partners_dao
 import products_dao
 import register_dao
 from sql_connect import get_sql_connect
-
-from flask_jwt_extended import create_access_token, JWTManager
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
 
 app = Flask(__name__)
 
@@ -26,18 +27,50 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email != "test" or password != "test":
-        return jsonify({"msg": "bad user or pass"}), 401
+        return {"msg": "Wrong email or password"}, 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    response = {"access_token": access_token}
+    return response
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
+
+@app.route('/profile')
+@jwt_required()
+def my_profile():
+    response_body = {
+        "name": "Nagato",
+        "about": "Hello! I'm a full stack developer that loves python and javascript"
+    }
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    data = json.loads(request.data)
+    print("before query")
+    loginD = log_in_dao.log_in(connection, data)
+    print("after query")
+    response = jsonify({
+        'login_status': loginD
+    })
+    print(loginD)
+    return response
+
 
 @app.route('/register', methods=['POST'])
 def new_register():
     data = json.loads(request.data)
     register = register_dao.new_register(connection, data)
     response = jsonify({
-        'register': register
+        'register_status': register
     })
+    print(register)
     return response
 
 
@@ -123,6 +156,7 @@ def after_request(response):
         'Access-Control-Allow-Headers'] = 'Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization'
     response.headers['Access-Control-Allow-Methods'] = 'POST, PUT, PATCH, GET, DELETE, OPTIONS'
     return response
+
 
 if __name__ == '__main__':
     print("Starting Python Flask Server")

@@ -1,6 +1,7 @@
 import React from 'react'
 import {FaBars} from 'react-icons/fa'
 import {FaBoxes} from 'react-icons/fa'
+import useToken from '../Token';
 
 
 import { Nav,
@@ -15,6 +16,7 @@ import { Nav,
 	NavBtnLink} from './NavbarElements'
 
 const Navbar = ({ toggle }) => {
+	const { token, removeToken, setToken } = useToken();
 	return (
 		<>
 			<Nav>
@@ -38,9 +40,15 @@ const Navbar = ({ toggle }) => {
 							<NavLinks to='/partners'>About</NavLinks>
 						</NavItem>
 					</NavMenu>
+					
 					<NavBtn>
 						<NavBtnLink to="/login">Log In</NavBtnLink>
 					</NavBtn>
+					
+
+			
+
+				
 					
 					
 				</NavbarContainer>

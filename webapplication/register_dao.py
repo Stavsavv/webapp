@@ -1,6 +1,5 @@
 from sql_connect import get_sql_connect
 
-
 def new_register(connection, register):
     cursor = connection.cursor()
     email = "'" + register['email'] + "'"
@@ -8,8 +7,7 @@ def new_register(connection, register):
     cursor.execute(query)
     cursor.fetchall()
     if cursor.rowcount == 1:
-        print('aasdf')
-        return "yparxei hdh"
+        return "failed"
 
     query = 'INSERT INTO dbweb.register ' \
             '(username, email, password)' \
