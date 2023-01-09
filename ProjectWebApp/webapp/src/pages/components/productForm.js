@@ -9,6 +9,7 @@ export default function ProductForm(data) {
   const [pbf, setpbf] = React.useState("");
   const [paf, setpaf] = React.useState("");
   const [finalprice, setfinalprice] = React.useState("");
+  const emailID = localStorage.getItem('emailID');
 
   
 
@@ -20,7 +21,7 @@ export default function ProductForm(data) {
         //   'Accept': 'application/json',
         //   'Content-Type': 'application/json'
         // },
-        body: JSON.stringify({name: name, code: code, size: size, quantity: quantity, pbf: pbf, paf: paf, finalprice: finalprice})
+        body: JSON.stringify({name: name, code: code, size: size, quantity: quantity, pbf: pbf, paf: paf, finalprice: finalprice, emailID: emailID})
       }).then((result)=>{
           result.json().then((resp)=>{
             console.warn(resp)
@@ -28,7 +29,7 @@ export default function ProductForm(data) {
           })
         })
 
-    
+    console.log(emailID);
     event.preventDefault();
 
     setname("");

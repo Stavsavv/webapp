@@ -76,9 +76,9 @@ def new_register():
 
 @app.route('/getProducts', methods=['GET'])
 def get_products():
-    response = products_dao.get_all_products(connection)
-    response = jsonify(response)
-    return response
+    email = request.args.get('emailID')
+    item = products_dao.get_all_products(connection, email)
+    return jsonify(item)
 
 
 @app.route('/insertProduct', methods=['POST'])
@@ -113,9 +113,10 @@ def delete_product(id):
 
 @app.route('/getPartners', methods=['GET'])
 def get_partners():
-    response = partners_dao.get_all_partners(connection)
-    response = jsonify(response)
-    return response
+    emailID = request.args.get('emailID')
+    response = partners_dao.get_all_partners(connection, emailID)
+
+    return jsonify(response)
 
 
 @app.route('/insertPartner', methods=['POST'])

@@ -24,6 +24,18 @@ export const Container = styled.div`
 	}
 `
 
+export const ErrorM = styled.p`
+	padding:10px 20px 10px 20px;
+	background-repeat:no-repeat;
+	background-position: 100px center;
+	margin-top: -20px;
+	font-size: 22px;
+	font-weight:bold;
+	color:white;
+	background-color:#e63900;
+	text-align:center;
+`
+
 
 export const FormWrap = styled.div`
 	width:800px;

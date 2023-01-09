@@ -51,21 +51,25 @@ const Tablee = () => {
   const classes = useStyles();
   const [product, setProduct] = useState([]);
   const [search, setSearch] = useState("");
+  const emailID = localStorage.getItem('emailID');
+
 
   const getProductData = async () => {
-    try {
-      const data = await axios.get(
-        "http://127.0.0.1:5000/getProducts"
-      );
-      setProduct(data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  try {
+    const data = await axios.get(
+      `http://127.0.0.1:5000/getProducts?emailID=${emailID}`
+    );
+    setProduct(data.data);
+    console.log(emailID);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 
   useEffect(() => {
     getProductData();
-  }, []);
+  }, [emailID]);
 
  function deleteProduct(name, id)
   {
@@ -185,4 +189,3 @@ const Tablee = () => {
 };
 
 export default Tablee;
-

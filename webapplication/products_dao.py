@@ -1,15 +1,15 @@
 from sql_connect import get_sql_connect
 
 
-def get_all_products(connection):
+def get_all_products(connection, email):
     cursor = connection.cursor()
 
-    query = "SELECT * FROM products;"
-    cursor.execute(query)
+    query = "SELECT * FROM products where emailID=%s "
+    cursor.execute(query, (email,))
 
     response = []
 
-    for (id, name, code, size, quantity, pbf, paf, finalprice) in cursor:
+    for (id, name, code, size, quantity, pbf, paf, finalprice, emailID) in cursor:
         response.append(
             {
                 'id': id,
@@ -19,20 +19,24 @@ def get_all_products(connection):
                 'quantity': quantity,
                 'pbf': pbf,
                 'paf': paf,
-                'finalprice': finalprice
+                'finalprice': finalprice,
+                'emailID': emailID
             }
         )
 
     return response
 
+
+
+
 def insert_new_product(connection, products):
     cursor = connection.cursor()
     query = 'INSERT INTO dbweb.products ' \
-            '(name, code, size, quantity, pbf, paf, finalprice)' \
-            'VALUES (%s, %s, %s, %s, %s, %s, %s)'
+            '(name, code, size, quantity, pbf, paf, finalprice, emailID)' \
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
 
     data = (products['name'], products['code'], products['size'], products['quantity'], products['pbf'],
-            products['paf'], products['finalprice'])
+            products['paf'], products['finalprice'], products['emailID'])
 
     cursor.execute(query, data)
     connection.commit()
@@ -42,11 +46,12 @@ def insert_new_product(connection, products):
 
 def edit_product(connection, products):
     cursor = connection.cursor()
-    query = 'UPDATE dbweb.products SET name=%s, code=%s, size=%s, quantity=%s, pbf=%s, paf=%s, finalprice=%s WHERE ' \
+    query = 'UPDATE dbweb.products SET name=%s, code=%s, size=%s, quantity=%s, pbf=%s, paf=%s, finalprice=%s, ' \
+            'emailID=%s WHERE ' \
             'id=%s '
 
     data = (products['name'], products['code'], products['size'], products['quantity'], products['pbf'],
-            products['paf'], products['finalprice'], products['id'])
+            products['paf'], products['finalprice'], products['emailID'], products['id'])
 
     cursor.execute(query, data)
     connection.commit()

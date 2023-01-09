@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,22 +9,20 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      margin: 0,
-      padding: theme.spacing(3),
-      
-    },
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: 'red',
-    },
-  });
+const styles = (theme: Theme) => createStyles({
+  root: {
+    margin: 0,
+    padding: theme.spacing(3),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: 'red',
+  },
+});
 
-export interface DialogTitleProps extends WithStyles<typeof styles> {
+interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -44,14 +42,19 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   );
 });
 
-const DialogContent = withStyles((theme: Theme) => ({
+const DialogContent = withStyles((theme: Theme) => createStyles({
   root: {
     padding: theme.spacing(2),
   },
 }))(MuiDialogContent);
 
-export default function CustomizedDialogsEdit({children,title}) {
-  const [open, setOpen] = React.useState(false);
+interface Props {
+  children: React.ReactNode;
+  title: string;
+}
+
+const CustomizedDialogsEdit = ({ children, title }: Props) => {
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -65,13 +68,14 @@ export default function CustomizedDialogsEdit({children,title}) {
       <Button onClick={handleClickOpen}> <EditIcon fontSize="medium"/> </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title2" open={open}>
         <DialogTitle id="customized-dialog-title2" onClose={handleClose}>
-        {title}
+          {title}
         </DialogTitle>
         <DialogContent dividers>
           {children}
         </DialogContent>
-       
       </Dialog>
     </div>
   );
-}
+};
+
+export default CustomizedDialogsEdit;

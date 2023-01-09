@@ -24,6 +24,16 @@ export const Container = styled.div`
 	}
 `
 
+export const ErrorM = styled.p`
+	background-repeat:no-repeat;
+	font-size: 22px;
+	font-weight:bold;
+	margin-top: -50px;
+	color:white;
+	background-color:#e63900;
+	text-align:center;
+`
+
 
 export const FormWrap = styled.div`
 	width:800px;
@@ -154,7 +164,7 @@ export const Form = styled.form`
 `
 
 export const FormH1 = styled.h1`
-	margin-bottom:40px;
+	margin-bottom:20px;
 	color:white;
 	font-size:23px;
 	font-weight:400;

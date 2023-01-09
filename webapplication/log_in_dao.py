@@ -5,8 +5,6 @@ def log_in(connection, loginD):
     cursor = connection.cursor()
     email = "'" + loginD['email'] + "'"
     password = "'" + loginD['password'] + "'"
-    print(email)
-    print(password)
 
     query = 'select * from dbweb.register where email = ' + email + ' and password = ' + password
 
@@ -14,6 +12,12 @@ def log_in(connection, loginD):
     cursor.fetchall()
     if cursor.rowcount == 1:
         return "success"
+
+    query = 'select * from dbweb.register where email = ' + email
+    cursor.execute(query)
+    cursor.fetchall()
+    if cursor.rowcount == 1:
+        return "fpassword"
     else:
         return "failed"
 

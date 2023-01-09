@@ -1,30 +1,12 @@
 import React from 'react';
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
 
-ReactDOM.render(
+const Root = () => (
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
-  document.getElementById("root")
+  </BrowserRouter>
 );
 
-
-const Home = () => {
-	// const [isOpen, setIsOpen] = useState(false)
-
-	// const toggle = () => {
-	// 	setIsOpen(!isOpen)
-	// }
-	return (
-		<>
-			
-		</>
-	)
-}
-
-export default Home
+export default Root;

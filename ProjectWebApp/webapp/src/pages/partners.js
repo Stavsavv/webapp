@@ -15,13 +15,15 @@ const Partners = () => {
 
 	const [partner, setPartner] = useState([]);
 	const [search, setSearch] = useState("");
+	const emailID = localStorage.getItem('emailID');
 
 	const getPartnersData = async () => {
     try {
 	      const data = await axios.get(
-	        "http://127.0.0.1:5000/getPartners"
+	      	`http://127.0.0.1:5000/getPartners?emailID=${emailID}`
 	      );
 	      setPartner(data.data);
+	      console.log(emailID);
 	    } catch (e) {
 	      console.log(e);
 	      
@@ -30,7 +32,7 @@ const Partners = () => {
 
 	  useEffect(() => {
 	    getPartnersData();
-	  }, []);
+	  }, [emailID]);
 
 function deletePartner(name, id)
   {

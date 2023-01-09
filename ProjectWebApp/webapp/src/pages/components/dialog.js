@@ -8,22 +8,20 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      margin: 0,
-      padding: theme.spacing(3),
-      
-    },
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: 'red',
-    },
-  });
+const styles = (theme: Theme) => createStyles({
+  root: {
+    margin: 0,
+    padding: theme.spacing(3),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: 'red',
+  },
+});
 
-export interface DialogTitleProps extends WithStyles<typeof styles> {
+interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -43,13 +41,18 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   );
 });
 
-const DialogContent = withStyles((theme: Theme) => ({
+const DialogContent = withStyles((theme: Theme) => createStyles({
   root: {
     padding: theme.spacing(2),
   },
 }))(MuiDialogContent);
 
-export default function CustomizedDialogs({children,title}) {
+interface Props {
+  children: React.ReactNode;
+  title: string;
+}
+
+const CustomizedDialogs = ({ children, title }: Props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -64,13 +67,14 @@ export default function CustomizedDialogs({children,title}) {
       <Button onClick={handleClickOpen}> Add </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-        {title}
+          {title}
         </DialogTitle>
         <DialogContent dividers>
           {children}
         </DialogContent>
-       
       </Dialog>
     </div>
   );
-}
+};
+
+export default CustomizedDialogs;

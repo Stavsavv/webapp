@@ -12,6 +12,7 @@ export default function PartnerForm(data) {
   const [IBAN2, setIBAN2] = React.useState("");
   const [bank3, setbank3] = React.useState("");
   const [IBAN3, setIBAN3] = React.useState("");
+  const emailID = localStorage.getItem('emailID');
   
 
 
@@ -24,7 +25,7 @@ export default function PartnerForm(data) {
         //   'Accept': 'application/json',
         //   'Content-Type': 'application/json'
         // },
-        body: JSON.stringify({name: name, email: email, phone: phone, phone2: phone2, bank: bank, IBAN: IBAN, bank2: bank2, IBAN2: IBAN2, bank3: bank3, IBAN3: IBAN3 })
+        body: JSON.stringify({name: name, email: email, phone: phone, phone2: phone2, bank: bank, IBAN: IBAN, bank2: bank2, IBAN2: IBAN2, bank3: bank3, IBAN3: IBAN3, emailID: emailID })
       }).then((result)=>{
           result.json().then((resp)=>{
             console.warn(resp)

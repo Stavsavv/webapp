@@ -13,7 +13,6 @@ const styles = (theme: Theme) =>
     root: {
       margin: 0,
       padding: theme.spacing(3),
-      
     },
     closeButton: {
       position: 'absolute',
@@ -49,7 +48,7 @@ const DialogContent = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function CustomizedDialogs({children,title}) {
+export default function CustomizedDialogs({ children, title }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -61,15 +60,12 @@ export default function CustomizedDialogs({children,title}) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}> Add </Button>
+      <Button onClick={handleClickOpen}>Add</Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-        {title}
+          {title}
         </DialogTitle>
-        <DialogContent dividers>
-          {children}
-        </DialogContent>
-       
+        <DialogContent dividers>{children}</DialogContent>
       </Dialog>
     </div>
   );

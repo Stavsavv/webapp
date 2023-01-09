@@ -1,61 +1,56 @@
-import React from 'react'
-import {FaBars} from 'react-icons/fa'
-import {FaBoxes} from 'react-icons/fa'
-import useToken from '../Token';
+import React from 'react';
+import {FaBars} from 'react-icons/fa';
+import {FaBoxes} from 'react-icons/fa';
+import { Redirect, withRouter } from 'react-router-dom';
+import { Nav, NavbarContainer, NavLogo1, NavLogo2, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
 
+const NavbarLayout = ({ toggle, history }) => {
+  const logout = () => {
+    localStorage.removeItem('emailID');
+    history.push('/login');
+  }
 
-import { Nav,
-	NavbarContainer,
-	NavLogo1,NavLogo2,
-	MobileIcon,
-	NavMenu,
-	NavItem,
-	NavLinks,
-	NavBtn,
-	
-	NavBtnLink} from './NavbarElements'
-
-const Navbar = ({ toggle }) => {
-	const { token, removeToken, setToken } = useToken();
-	return (
-		<>
-			<Nav>
-				<NavbarContainer>
-					<div>
-						<NavLogo1 to='/'>Your Digital</NavLogo1>
-						<NavLogo2 to='/'> Warehouse<FaBoxes size="50px"/></NavLogo2>
-
-					</div>
-					<MobileIcon onClick={toggle}>
-						<FaBars />
-					</MobileIcon>
-					<NavMenu>
-						<NavItem>
-							<NavLinks to='products'>Products</NavLinks>
-						</NavItem>
-						<NavItem>
-							<NavLinks to='/partners'>Partners</NavLinks>
-						</NavItem>
-						<NavItem>
-							<NavLinks to='/partners'>About</NavLinks>
-						</NavItem>
-					</NavMenu>
-					
-					<NavBtn>
-						<NavBtnLink to="/login">Log In</NavBtnLink>
-					</NavBtn>
-					
-
-			
-
-				
-					
-					
-				</NavbarContainer>
-			</Nav>
-		</>
-	
-	)
+  return (
+    <>
+      <div>
+        <NavLogo1 >Your Digital</NavLogo1>
+        <NavLogo2 > Warehouse<FaBoxes size="50px" /></NavLogo2>
+      </div>
+      <MobileIcon onClick={toggle}>
+        <FaBars />
+      </MobileIcon>
+      <NavMenu>
+        <NavItem>
+          <NavLinks to="products">Products</NavLinks>
+        </NavItem>
+        <NavItem>
+          <NavLinks to="/partners">Partners</NavLinks>
+        </NavItem>
+        <NavItem>
+          <NavLinks to="/partners">About</NavLinks>
+        </NavItem>
+        {localStorage.getItem('emailID') ? (
+          <NavBtn>
+            <NavBtnLink onClick={logout}>Logout</NavBtnLink>
+          </NavBtn>
+        ) : (
+          <NavBtn>
+            <NavBtnLink to="/login">Log In</NavBtnLink>
+          </NavBtn>
+        )}
+      </NavMenu>
+    </>
+  )
 }
 
-export default Navbar
+const Navbar = React.memo(({ toggle, history }) => {
+  return (
+    <Nav>
+      <NavbarContainer>
+        <NavbarLayout toggle={toggle} history={history} />
+      </NavbarContainer>
+    </Nav>
+  )
+})
+
+export default withRouter(Navbar);

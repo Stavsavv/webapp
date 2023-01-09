@@ -1,15 +1,15 @@
 from sql_connect import get_sql_connect
 
 
-def get_all_partners(connection):
+def get_all_partners(connection, email):
     cursor = connection.cursor()
 
-    query = "SELECT * FROM partners;"
-    cursor.execute(query)
+    query = "SELECT * FROM partners where emailID=%s;"
+    cursor.execute(query, (email,))
 
     response = []
 
-    for (id, name, email, phone, phone2, bank, IBAN, bank2, IBAN2, bank3, IBAN3) in cursor:
+    for (id, name, email, phone, phone2, bank, IBAN, bank2, IBAN2, bank3, IBAN3, emailID) in cursor:
         response.append(
             {
                 'id': id,
@@ -23,6 +23,7 @@ def get_all_partners(connection):
                 'IBAN2': IBAN2,
                 'bank3': bank3,
                 'IBAN3': IBAN3,
+                'emailID': emailID
 
             }
         )
@@ -33,11 +34,11 @@ def get_all_partners(connection):
 def insert_new_partner(connection, partners):
     cursor = connection.cursor()
     query = 'INSERT INTO dbweb.partners ' \
-            '(name, email, phone, phone2, bank, IBAN, bank2, IBAN2, bank3, IBAN3)' \
-            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            '(name, email, phone, phone2, bank, IBAN, bank2, IBAN2, bank3, IBAN3, emailID)' \
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 
     data = (partners['name'], partners['email'], partners['phone'], partners['phone2'], partners['bank'],
-            partners['IBAN'], partners['bank2'], partners['IBAN2'], partners['bank3'], partners['IBAN3'])
+            partners['IBAN'], partners['bank2'], partners['IBAN2'], partners['bank3'], partners['IBAN3'], partners['emailID'])
 
     cursor.execute(query, data)
     connection.commit()
@@ -48,11 +49,11 @@ def insert_new_partner(connection, partners):
 def edit_partner(connection, partners):
     cursor = connection.cursor()
     query = 'UPDATE dbweb.partners SET name=%s, email=%s, phone=%s, phone2=%s, bank=%s, IBAN=%s, bank2=%s, ' \
-            'IBAN2=%s, bank3=%s, IBAN3=%s WHERE id=%s '
+            'IBAN2=%s, bank3=%s, IBAN3=%s emailID=%s WHERE id=%s '
 
     data = (partners['name'], partners['email'], partners['phone'], partners['phone2'], partners['bank'],
             partners['IBAN'], partners['bank2'], partners['IBAN2'], partners['bank3'], partners['IBAN3'],
-            partners['id'])
+            partners['emailID'], partners['id'])
 
     cursor.execute(query, data)
     connection.commit()
