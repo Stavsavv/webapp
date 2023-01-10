@@ -95,14 +95,16 @@ const Tablee = () => {
     
       <div className="tools">
    
-          <div className="add">
-            <div>
-                <input type="search" placeholder="Search here...." className="right"  onChange={(e) => {setSearch(e.target.value); }} />
-               <CustomizedDialogs>
-                  <ProductForm getProductData={getProductData}/>
-                </CustomizedDialogs>
-          </div>
+          {emailID ? (
+      <div className="add">
+        <div>
+            <input type="search" placeholder="Search here...." className="right"  onChange={(e) => {setSearch(e.target.value); }} />
+          <CustomizedDialogs>
+            <ProductForm getProductData={getProductData}/>
+          </CustomizedDialogs>
+        </div>
       </div>
+    ) : null}
           
 
       <TableContainer component={Paper}>

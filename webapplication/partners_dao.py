@@ -49,11 +49,11 @@ def insert_new_partner(connection, partners):
 def edit_partner(connection, partners):
     cursor = connection.cursor()
     query = 'UPDATE dbweb.partners SET name=%s, email=%s, phone=%s, phone2=%s, bank=%s, IBAN=%s, bank2=%s, ' \
-            'IBAN2=%s, bank3=%s, IBAN3=%s emailID=%s WHERE id=%s '
+            'IBAN2=%s, bank3=%s, IBAN3=%s  WHERE id=%s '
 
     data = (partners['name'], partners['email'], partners['phone'], partners['phone2'], partners['bank'],
             partners['IBAN'], partners['bank2'], partners['IBAN2'], partners['bank3'], partners['IBAN3'],
-            partners['emailID'], partners['id'])
+             partners['id'])
 
     cursor.execute(query, data)
     connection.commit()

@@ -10,6 +10,7 @@ export default function EditForm(arg) {
   const [pbf, setpbf] = React.useState(arg.pbf);
   const [paf, setpaf] = React.useState(arg.paf);
   const [finalprice, setfinalprice] = React.useState(arg.finalprice);
+  const emailID = localStorage.getItem('emailID');
  
   const handleSubmit = ({getProductData},event) => {
     fetch(`http://127.0.0.1:5000//editProduct`,{

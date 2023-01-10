@@ -47,7 +47,7 @@ function deletePartner(name, id)
       }).then((result)=>{
         result.json().then((resp)=>{
           console.warn(resp)
-          window.alert('Partner deleted successfully')
+          window.alert(name +' deleted successfully')
           getPartnersData();
         })
       })
@@ -56,13 +56,18 @@ function deletePartner(name, id)
 
 	return (
 		<>
-			<div className="Tile">_</div>
+
+			
+					<div className="Tile">_</div>
 			<div className="buttonn">
-					
+			{emailID ? (
 									<CustomizedDialogs>
 	                  <PartnerForm />
 	                </CustomizedDialogs>
+	                ) : null}
+	                {emailID ? (
 	                <input type="search" placeholder="Search here...." onChange={(e) => {setSearch(e.target.value); }} />
+	                ) : null}
 	                            
 	    </div>
 

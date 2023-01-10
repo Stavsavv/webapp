@@ -31,7 +31,7 @@ def get_all_products(connection, email):
 
 def insert_new_product(connection, products):
     cursor = connection.cursor()
-    query = 'INSERT INTO dbweb.products ' \
+    query = 'INSERT INTO products ' \
             '(name, code, size, quantity, pbf, paf, finalprice, emailID)' \
             'VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
 
@@ -46,16 +46,18 @@ def insert_new_product(connection, products):
 
 def edit_product(connection, products):
     cursor = connection.cursor()
-    query = 'UPDATE dbweb.products SET name=%s, code=%s, size=%s, quantity=%s, pbf=%s, paf=%s, finalprice=%s, ' \
-            'emailID=%s WHERE ' \
+
+    query = 'UPDATE products SET name=%s, code=%s, size=%s, quantity=%s, pbf=%s, paf=%s, finalprice=%s WHERE ' \
             'id=%s '
 
     data = (products['name'], products['code'], products['size'], products['quantity'], products['pbf'],
-            products['paf'], products['finalprice'], products['emailID'], products['id'])
+            products['paf'], products['finalprice'], products['id'])
 
     cursor.execute(query, data)
     connection.commit()
+
     return "success"
+
 
 
 def delete_product(connection, id):

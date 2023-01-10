@@ -29,7 +29,10 @@ const NavbarLayout = ({ toggle, history }) => {
         <NavItem>
           <NavLinks to="/partners">About</NavLinks>
         </NavItem>
-        {localStorage.getItem('emailID') ? (
+        
+        )}
+      </NavMenu>
+       {localStorage.getItem('emailID') ? (
           <NavBtn>
             <NavBtnLink onClick={logout}>Logout</NavBtnLink>
           </NavBtn>
@@ -38,7 +41,6 @@ const NavbarLayout = ({ toggle, history }) => {
             <NavBtnLink to="/login">Log In</NavBtnLink>
           </NavBtn>
         )}
-      </NavMenu>
     </>
   )
 }

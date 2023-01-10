@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   SidebarContainer,
@@ -14,9 +14,17 @@ import {
 const Sidebar = ({ isOpen, toggle }) => {
   const history = useHistory()
 
-  const handleSidebarLinkClick = (link) => {
-    toggle()
-    history.push(link)
+  const handleSidebarLinkClick = useCallback(
+    (link) => {
+      toggle()
+      history.push(link)
+    },
+    [history, toggle]
+  )
+
+  const logout = () => {
+    localStorage.removeItem('emailID')
+    history.push('/login')
   }
 
   return (
@@ -26,24 +34,42 @@ const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="/products" onClick={() => handleSidebarLinkClick('/products')}>
+          <SidebarLink
+            to="/products"
+            onClick={() => handleSidebarLinkClick('/products')}
+          >
             Products
           </SidebarLink>
-          <SidebarLink to="/partners" onClick={() => handleSidebarLinkClick('/partners')}>
+          <SidebarLink
+            to="/partners"
+            onClick={() => handleSidebarLinkClick('/partners')}
+          >
             Partners
           </SidebarLink>
-          <SidebarLink to="/about" onClick={() => handleSidebarLinkClick('/about')}>
+          <SidebarLink
+            to="/about"
+            onClick={() => handleSidebarLinkClick('/about')}
+          >
             About
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/login" onClick={() => handleSidebarLinkClick('/login')}>
-            Log In
-          </SidebarRoute>
+          {localStorage.getItem('emailID') ? (
+            <SidebarRoute to="/logout" onClick={logout}>
+              Log Out
+            </SidebarRoute>
+          ) : (
+            <SidebarRoute
+              to="/login"
+              onClick={() => handleSidebarLinkClick('/login')}
+            >
+              Log In
+            </SidebarRoute>
+          )}
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>
   )
 }
 
-export default Sidebar
+export default React.memo(Sidebar)

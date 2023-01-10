@@ -94,12 +94,11 @@ def insert_product():
 @app.route('/editProduct', methods=['PUT'])
 def edit_product():
     data = json.loads(request.data)
+    print(data)
     product = products_dao.edit_product(connection, data)
 
-    response = jsonify({
-        'product': product
-    })
-    return response
+    print(product)
+    return jsonify(product)
 
 
 @app.route('/deleteProduct/<id>', methods=['DELETE'])
