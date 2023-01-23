@@ -2,29 +2,12 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { Container, FormWrap, FormContent, NavLogo1, NavLogo2, Form, FormH1, FormLabel, FormInput, FormImg, FormButton, ErrorM } from './RegisterElements'
 
-const RegisterFormLayout = ({ handleSubmit, username, setUsername, email, setEmail, password, setPassword, errorMessage }) => (
-  <>
-    <FormImg img src='./img/CB.png' alt='CB' />
-    <FormContent>
-      <Form onSubmit={handleSubmit}>
-        <ErrorM>{errorMessage}</ErrorM>
-        <FormH1>Register</FormH1>
-        <FormLabel htmlFor='for'>Username</FormLabel>
-        <FormInput type='text' value={username} required onChange={(e) => setUsername(e.target.value)} />
-        <FormLabel htmlFor='for'>Email</FormLabel>
-        <FormInput type='email' value={email} required onChange={(e) => setEmail(e.target.value)} />
-        <FormLabel htmlFor='for'>Password</FormLabel>
-        <FormInput type='password' value={password} required onChange={(e) => setPassword(e.target.value)} />
-        <FormButton type='submit'>Register</FormButton>
-      </Form>
-    </FormContent>
-  </>
-)
+
 
 const RegisterForm = React.memo(({ data }) => {
-  const [username, setUsername] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [username, setusername] = React.useState("");
+  const [email, setemail] = React.useState("");
+  const [password, setpassword] = React.useState("");
   const [status, setStatus] = React.useState('')
   const [errorMessage, setErrorMessage] = React.useState('')
 
@@ -37,14 +20,15 @@ const RegisterForm = React.memo(({ data }) => {
 
     if (response['register_status'] === 'success') {
       setStatus('success')
+      console.log(status);
     } else if (response['register_status'] === 'failed') {
       setStatus('failed')
-      setErrorMessage('Email already!')
+      setErrorMessage('Email already in use!')
     }
 
-    setUsername('')
-    setPassword('')
-    setEmail('')
+    setusername('')
+    setpassword('')
+    setemail('')
   }
 
   if (status === 'success') {
@@ -52,24 +36,36 @@ const RegisterForm = React.memo(({ data }) => {
   } else {
     return (
       <>
+
         <Container>
-          <FormWrap>
-            <RegisterFormLayout
-              handleSubmit={handleSubmit}
-              username={username}
-              setUsername={setUsername}
-              email={email}
-              setEmail={setEmail}
-              password={password}
-              setPassword={setPassword}
-              errorMessage={errorMessage}
-            />
-         
-            <div>
-              <NavLogo1 to="/">Your Digital </NavLogo1>
-              <NavLogo2 to="/"> Warehouse</NavLogo2>
-            </div>
+            
+          <FormWrap>  
+            <FormImg img src='./img/CB.png' alt="CB" /> 
+            <FormContent>         
+              <Form onSubmit={handleSubmit}>
+                <ErrorM>{errorMessage}</ErrorM>
+                <FormH1>Create your account here</FormH1>
+                <FormLabel htmlFor='for'>Username</FormLabel>
+                 <FormInput type='text' value={username} required 
+                 onChange={e => setusername(e.target.value)}/>
+
+                 <FormLabel htmlFor='for'>Email</FormLabel>
+                 <FormInput type='email' value={email} required
+                 onChange={e => setemail(e.target.value)} />
+
+                 <FormLabel htmlFor='for'>Password</FormLabel>
+                 <FormInput type='password' value={password} required 
+                 onChange={e => setpassword(e.target.value)}/>
+                
+                 <FormButton type='submit'>Register</FormButton>
+              </Form> 
+            </FormContent>
+          
           </FormWrap>
+            <div>
+              <NavLogo1  to='/'>Your Digital </NavLogo1>
+              <NavLogo2  to='/'> Warehouse</NavLogo2>
+            </div>
         </Container>
       </>
     )

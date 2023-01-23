@@ -73,22 +73,8 @@ export const NavLogo1 = styled(LinkR)`
 	width:20%;
 
 
-	
 
-	@media screen and (max-width: 720px){
-	color:white;
-	justify-self:flex-start;
-	cursor:pointer;
-	font-size:35px;
-	display:flex;
-	align-items:center;
-	margin-left:24px;
-	font-weight:bold;
-	text-decoration:none;
-	height:80%;
-	}
-
-	@media screen and (max-width: 600px){
+	@media screen and (max-width: 1000px){
 		display:none;
 
 	}
@@ -109,21 +95,7 @@ export const NavLogo2 = styled(LinkR)`
 	width:20%;
 	
 
-	
-	@media screen and (max-width: 720px){
-	color:white;
-	justify-self:flex-start;
-	cursor:pointer;
-	font-size:35px;
-	display:flex;
-	align-items:center;
-	margin-left:24px;
-	font-weight:bold;
-	text-decoration:none;
-	height:80%;
-	}
-
-	@media screen and (max-width: 600px){
+	@media screen and (max-width: 1000px){
 		display:none;
 	}
 
@@ -145,22 +117,30 @@ export const FormContent= styled.div`
 
 export const Form = styled.form`
 	background:#e63900;
-	max-width:900px;
-	height:auto;
-	width:100%;
-	z-index:1;
-	display:grid;
-	margin:0 auto;
-	padding:80px 32px;
-	border-radius:4px;
-	box-shadow:0 1px 3px rgba(0,0,0,0.9);
+    max-width:900px;
+    height:auto;
+    width:100%;
+    z-index:1;
+    display:grid;
+    margin:0 auto;
+    padding:80px 32px;
+    border-radius:4px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.9);
 
-	 @media screen and (max-width: 1000px){
-	 	width:350px;
-		padding-bottom:40px;
-		height:auto;
-		justify-self: center;
-	}
+    @media screen and (max-width: 1000px){
+        width:350px;
+        padding-bottom:40px;
+        margin-left:100px;
+        height:auto;
+        justify-self: center;
+    }
+    @media screen and (max-width: 670px){
+        width:350px;
+        padding-bottom:40px;
+        margin-left:0px;
+        height:auto;
+        justify-self: center;
+    }
 `
 
 export const FormH1 = styled.h1`

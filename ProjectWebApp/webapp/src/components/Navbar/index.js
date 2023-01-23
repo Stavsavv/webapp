@@ -27,9 +27,9 @@ const NavbarLayout = ({ toggle, history }) => {
           <NavLinks to="/partners">Partners</NavLinks>
         </NavItem>
         <NavItem>
-          <NavLinks to="/partners">About</NavLinks>
+          <NavLinks to="/About">About us</NavLinks>
         </NavItem>
-        
+                
         )}
       </NavMenu>
        {localStorage.getItem('emailID') ? (

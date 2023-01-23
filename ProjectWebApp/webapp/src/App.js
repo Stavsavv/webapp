@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'; 
 import Partners from './pages/partners';
 import Products from './pages/products';
+import About from './components/About/index';
 import LogIn from './components/Login/index';
 import Register from './components/Register/index';
 import Navbar from './components/Navbar';
@@ -24,6 +25,9 @@ function App() {
       </Route>
       <Route exact path="/products">
         <Products />
+      </Route>
+      <Route exact path="/about">
+        <About />
       </Route>
       <Route exact path="/login">
         <LogIn />

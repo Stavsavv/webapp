@@ -72,7 +72,7 @@ function handleSubmit(event, email, password, dispatch) {
       } else {
         dispatch({
           type: 'error',
-          errorMessage: 'Email do not exist!',
+          errorMessage: "Email doesn't exist !",
         });
       }
     })

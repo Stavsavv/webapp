@@ -47,8 +47,8 @@ const Sidebar = ({ isOpen, toggle }) => {
             Partners
           </SidebarLink>
           <SidebarLink
-            to="/about"
-            onClick={() => handleSidebarLinkClick('/about')}
+            to="/About"
+            onClick={() => handleSidebarLinkClick('/About')}
           >
             About
           </SidebarLink>
