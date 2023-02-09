@@ -19,6 +19,21 @@ export const SidebarContainer = styled.aside`
 
 `
 
+export const User = styled.div`
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:3rem;
+	text-decoration:none;
+	list-style:none;
+	transition:0.2s ease-in-out;
+	text-decoration:none;
+	color:black;
+	margin-bottom:30px;
+`;
+
+
+
 export const CloseIcon = styled(FaTimes)`
 	color:black;
 `

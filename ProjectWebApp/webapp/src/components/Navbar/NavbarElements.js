@@ -105,6 +105,21 @@ export const NavLinks = styled(LinkR)`
 	}
 `;
 
+export const User = styled.div`
+	color: white;
+	display:flex;
+	align-items:center;
+	text-decoration:none;
+	padding: 0 1rem;
+	height:100%;
+	cursor:pointer;
+	font-size:30px;
+
+	@media screen and (max-width: 768px){
+		display:none;
+	}
+`;
+
 export const NavBtn =styled.nav`
 	display:flex;
 	align-items:center;

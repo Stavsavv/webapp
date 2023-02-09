@@ -2,7 +2,7 @@ import React from 'react';
 import {FaBars} from 'react-icons/fa';
 import {FaBoxes} from 'react-icons/fa';
 import { Redirect, withRouter } from 'react-router-dom';
-import { Nav, NavbarContainer, NavLogo1, NavLogo2, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
+import { Nav, NavbarContainer, NavLogo1, NavLogo2, MobileIcon, NavMenu, User, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
 
 const NavbarLayout = ({ toggle, history }) => {
   const logout = () => {
@@ -16,6 +16,13 @@ const NavbarLayout = ({ toggle, history }) => {
         <NavLogo1 >Your Digital</NavLogo1>
         <NavLogo2 > Warehouse<FaBoxes size="50px" /></NavLogo2>
       </div>
+      
+     {localStorage.getItem('emailID') ? (
+        <User>
+          Hello, {localStorage.getItem('user')}
+        </User>
+      ) : null}
+
       <MobileIcon onClick={toggle}>
         <FaBars />
       </MobileIcon>

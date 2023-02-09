@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarRoute,
   SideBtnWrap,
+  User,
 } from './SidebarElements'
 
 const Sidebar = ({ isOpen, toggle }) => {
@@ -33,6 +34,11 @@ const Sidebar = ({ isOpen, toggle }) => {
         <CloseIcon />
       </Icon>
       <SidebarWrapper>
+        {localStorage.getItem('emailID') ? (
+        <User>
+          Hello, {localStorage.getItem('user')}
+        </User>
+      ) : null}
         <SidebarMenu>
           <SidebarLink
             to="/products"

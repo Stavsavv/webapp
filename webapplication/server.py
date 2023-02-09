@@ -22,10 +22,12 @@ def login():
     data = json.loads(request.data)
     loginD = log_in_dao.log_in(connection, data)
     response = jsonify({
-        'login_status': loginD
+        'login_status': loginD['login_status'],
+        'username': loginD['username']
     })
     print(loginD)
     return response
+
 
 
 @app.route('/register', methods=['POST'])

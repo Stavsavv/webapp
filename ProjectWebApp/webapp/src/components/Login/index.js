@@ -11,37 +11,35 @@ export default function LoginForm(data) {
   const [email, setemail] = React.useState("");
   const [password, setpassword] = React.useState("");
   const [status, setstatus] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
  
-  //check local storage if it has a value
   const [loggedIn, setLoggedIn] = React.useState(!!localStorage.getItem('emailID'));
 
    const handleSubmit = async (event) => {
-       event.preventDefault();
-       setErrorMessage("");
-       const response = await fetch(`http://127.0.0.1:5000/login`,{
-        method: 'POST',
-        // headers: {
-        //   'Accept': 'application/json',
-        //   'Content-Type': 'application/json'
-        // },
-        body: JSON.stringify({email: email, password: password })
-      }).then((response) => response.json());
-     
-      if (response['login_status'] === "success") {
-        setstatus("succuess");
-        localStorage.setItem('emailID', email);
-        setLoggedIn(true);
-      } else if (response['login_status'] === "fpassword") {
-        setErrorMessage("Email and password do not match");
-      } else{
-        setErrorMessage("Email is not registered");
-      }
+    
+      event.preventDefault();
+      setErrorMessage("");
+      const response = await fetch(`http://127.0.0.1:5000/login`, {
+          method: 'POST',
+          body: JSON.stringify({email: email, password: password })
+      });
+      const responseData = await response.json();
 
-      setstatus(response);
+      if (responseData['login_status'] === "success") {
+          setUsername(responseData['username']);
+          setstatus("success");
+          localStorage.setItem('emailID', email);
+          localStorage.setItem('user', responseData['username']);
+          setLoggedIn(true);
+      } else if (responseData['login_status'] === "fpassword") {
+          setErrorMessage("Email and password do not match");
+      } else{
+          setErrorMessage("Email is not registered");
+      }
       setemail("");
       setpassword("");
-  } 
+  };
 
   if (loggedIn) {
     //localstorage

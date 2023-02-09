@@ -9,17 +9,19 @@ def log_in(connection, loginD):
     query = 'select * from dbweb.register where email = ' + email + ' and password = ' + password
 
     cursor.execute(query)
-    cursor.fetchall()
+    results = cursor.fetchall()
     if cursor.rowcount == 1:
-        return "success"
+        username = results[0][1] # retrieve the username from the query results
+        return {"login_status": "success", "username": username}
 
     query = 'select * from dbweb.register where email = ' + email
     cursor.execute(query)
     cursor.fetchall()
     if cursor.rowcount == 1:
-        return "fpassword"
+        return {"login_status": "fpassword"}
     else:
-        return "failed"
+        return {"login_status": "failed"}
+
 
 
 if __name__ == '__main__':
