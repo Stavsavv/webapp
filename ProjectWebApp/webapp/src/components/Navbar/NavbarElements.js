@@ -57,7 +57,7 @@ export const NavLogo2 = styled(LinkR)`
 export const MobileIcon = styled.div`
 	display:none;
 
-	@media screen and (max-width: 768px){
+	@media screen and (max-width: 870px){
 		display:block;
 		position:absolute;
 		top:0;
@@ -76,7 +76,7 @@ export const NavMenu = styled.ul`
 	text-align:center;
 	margin-right:-22px;
 
-	@media screen and (max-width: 768px){
+	@media screen and (max-width: 870px){
 		display:none;
 	}
 `;
@@ -112,10 +112,9 @@ export const User = styled.div`
 	text-decoration:none;
 	padding: 0 1rem;
 	height:100%;
-	cursor:pointer;
 	font-size:30px;
 
-	@media screen and (max-width: 768px){
+	@media screen and (max-width: 870px){
 		display:none;
 	}
 `;
@@ -124,7 +123,7 @@ export const NavBtn =styled.nav`
 	display:flex;
 	align-items:center;
 
-	@media screen and (max-width: 768px){
+	@media screen and (max-width: 870px){
 		display:none;
 	}
 `;
