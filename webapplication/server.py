@@ -1,9 +1,6 @@
 import json
 
 from flask import Flask, request, jsonify
-from datetime import datetime, timedelta, timezone
-from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, \
-    unset_jwt_cookies, jwt_required, JWTManager
 
 from flask_cors import CORS
 
@@ -15,47 +12,15 @@ from sql_connect import get_sql_connect
 
 app = Flask(__name__)
 
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-jwt = JWTManager(app)
 
 CORS(app, resources=r'/editProduct', headers='Content-Type')
 connection = get_sql_connect()
 
 
-@app.route('/token', methods=['POST'])
-def create_token():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "test" or password != "test":
-        return {"msg": "Wrong email or password"}, 401
-
-    access_token = create_access_token(identity=email)
-    response = {"access_token": access_token}
-    return response
-
-
-@app.route("/logout", methods=["POST"])
-def logout():
-    response = jsonify({"msg": "logout successful"})
-    unset_jwt_cookies(response)
-    return response
-
-
-@app.route('/profile')
-@jwt_required()
-def my_profile():
-    response_body = {
-        "name": "Nagato",
-        "about": "Hello! I'm a full stack developer that loves python and javascript"
-    }
-
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     data = json.loads(request.data)
-    print("before query")
     loginD = log_in_dao.log_in(connection, data)
-    print("after query")
     response = jsonify({
         'login_status': loginD
     })

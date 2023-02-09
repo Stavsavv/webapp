@@ -18,7 +18,7 @@ function App() {
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
       <Route exact path="/">
-        <LogIn />
+        <About />
       </Route>
       <Route exact path="/partners">
         <Partners />
